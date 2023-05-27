@@ -2,8 +2,9 @@
 This is a Microsoft Power BI report used to visualize a database relationship schema. 
 I needed to diagram the database for future work.  
 The development enviornment is SQL Server version SQL2022	RTM	Developer Edition (64-bit)	16.0.1050.5
+
 https://www.microsoft.com/en-us/sql-server/sql-server-downloads
-Sql Server Management Studio 
+Sql Server Management Studio <br>
 https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver16
 and Microsoft Power BI. 
 https://www.microsoft.com/en-us/sql-server/sql-server-downloads
