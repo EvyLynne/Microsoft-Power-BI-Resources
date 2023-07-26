@@ -19,7 +19,7 @@ SELECT SCHEMA_NAME(pk_tab.schema_id) AS primary_schema,
     fk.name AS fk_constraint_name,
 	fk_cols.constraint_column_id AS [no of relationships],
 	COUNT (pk_col.name) OVER (PARTITION BY pk_tab.name) AS [Total Dependant Tables]
-INTO PowerBI.ALL_RELATIONSHIPS
+INTO PowerBI.ALL_RELATIONSHIPS -- I used all caps so it would stand out from the data
 FROM sys.foreign_keys fk
     INNER JOIN sys.tables fk_tab
         ON fk_tab.object_id = fk.parent_object_id
