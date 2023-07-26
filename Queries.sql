@@ -33,9 +33,10 @@ ON dupes.COLUMN_NAME = cols.COLUMN_NAME
  ON [AdventureWorks2022].[dbo].[ALL_POSSIBLE_RELATIONSHIPS].tbl_name = INFORMATION_SCHEMA.TABLES.TABLE_NAME
 
 -- all relationships in database
-
+-- https://dataedo.com/kb/query/sql-server/list-foreign-keys-sql-queries
+	
 select schema_name(fk_tab.schema_id) + '.' + fk_tab.name as foreign_table,
-    '>--' as rel,
+    '>-' as rel,
     schema_name(pk_tab.schema_id) + '.' + pk_tab.name as primary_table,
     fk_cols.constraint_column_id as no, 
     fk_col.name as fk_column_name,
@@ -58,7 +59,6 @@ from sys.foreign_keys fk
 order by schema_name(fk_tab.schema_id) + '.' + fk_tab.name,
     schema_name(pk_tab.schema_id) + '.' + pk_tab.name, 
     fk_cols.constraint_column_id
-
 
 -- Removes duplicate joins after CTE query executes
 
