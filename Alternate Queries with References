@@ -1,4 +1,4 @@
---  Check DB actual totals
+--  DB statistics
  
 SELECT count(*) [Total Tables],
 'Total Tables' [Type]
@@ -9,8 +9,7 @@ SELECT COUNT(*) [Total Relationships],
 'Total Relationships' [Relationships]
 FROM information_schema.referential_constraints 
 
--- all columns in the entire database that can be joined 
--- I did this in two steps for simplicity 
+-- List tables and columns
 
 SELECT 
 cols.TABLE_NAME,
@@ -25,12 +24,6 @@ INNER JOIN
 
 	) dupes
 ON dupes.COLUMN_NAME = cols.COLUMN_NAME
-
- update [AdventureWorks2022].[dbo].[ALL_POSSIBLE_RELATIONSHIPS]
- set TableSchemaName = INFORMATION_SCHEMA.TABLES.TABLE_SCHEMA
- FROM [AdventureWorks2022].[dbo].[ALL_POSSIBLE_RELATIONSHIPS]
- INNER JOIN  INFORMATION_SCHEMA.TABLES 
- ON [AdventureWorks2022].[dbo].[ALL_POSSIBLE_RELATIONSHIPS].tbl_name = INFORMATION_SCHEMA.TABLES.TABLE_NAME
 
 -- all relationships in database
 -- https://dataedo.com/kb/query/sql-server/list-foreign-keys-sql-queries
@@ -60,55 +53,59 @@ order by schema_name(fk_tab.schema_id) + '.' + fk_tab.name,
     schema_name(pk_tab.schema_id) + '.' + pk_tab.name, 
     fk_cols.constraint_column_id
 
--- Removes duplicate joins after CTE query executes
+-- Lists Foreign Key Constraints as comma separated when there are multiple values
+-- https://www.techbrothersit.com/2016/04/how-to-get-parent-table-reference-table.html
+-- formatted / edited for clarity - no code changes
 
 ;With CTE_FK AS (
-	SELECT Schema_Name(Schema_id) as TableSchemaName,
-	  object_name(FK.parent_object_id) ParentTableName,
-	  object_name(FK.referenced_object_id) ReferenceTableName,
-	  FK.name AS ForeignKeyConstraintName,
-	  c.name as ReferencedColumn,
-	  cf.name as ParentColumnName 
-	FROM sys.foreign_keys AS FK
-		INNER JOIN sys.foreign_key_columns AS FKC
-			ON FK.OBJECT_ID = FKC.constraint_object_id
-		INNER JOIN sys.columns c
-			ON  c.OBJECT_ID = FKC.referenced_object_id
-			AND c.column_id = FKC.referenced_column_id
-		INNER JOIN sys.columns cf
-			ON  cf.OBJECT_ID = FKC.parent_object_id
-			AND cf.column_id = FKC.parent_column_id
+SELECT Schema_Name(Schema_id) AS TableSchemaName,
+  object_name(FK.parent_object_id) ParentTableName,
+  object_name(FK.referenced_object_id) ReferenceTableName,
+  FK.name AS ForeignKeyConstraintName,
+  c.name AS ReferencedColumnList,
+  cf.name AS ParentColumnName 
+ FROM sys.foreign_keys AS FK 
+INNER JOIN sys.foreign_key_columns AS FKC ON FK.OBJECT_ID = FKC.constraint_object_id
+INNER JOIN sys.columns c ON  c.OBJECT_ID = FKC.referenced_object_id
+      AND c.column_id = FKC.referenced_column_id
+INNER JOIN sys.columns cf ON  cf.OBJECT_ID = FKC.parent_object_id
+      AND cf.column_id = FKC.parent_column_id
 )
-Select 
+Select TableSchemaName,
        ParentTableName,
        ReferenceTableName,
        ForeignKeyConstraintName,
-	   
-	   stuff(
+	   STUFF(
 				(
-					Select ','+ParentColumnName
-					from CTE_FK i
-					where i.ForeignKeyConstraintName=o.ForeignKeyConstraintName
-						and i.TableSchemaName=o.TableSchemaName
-						and i.ParentTableName=o.ParentTableName
-						and i.ReferenceTableName=o.ReferenceTableName
-					for xml path('')), 1, 1, '') ParentColumnList
-					,
-		stuff(
-						(
-							Select ','+ ReferencedColumn
-							from CTE_FK i
-							where i.ForeignKeyConstraintName=o.ForeignKeyConstraintName
-								and i.TableSchemaName=o.TableSchemaName
-								and i.ParentTableName=o.ParentTableName
-								and i.ReferenceTableName=o.ReferenceTableName
-							for xml path('')), 1, 1, '') RefColumnList,
-							COUNT (ReferencedColumn) over (partition by ParentTableName) as [Total Fks],
-							TableSchemaName
-							from CTE_FK o
+				SELECT ','+ParentColumnName
+                FROM CTE_FK i
+                WHERE i.ForeignKeyConstraintName=o.ForeignKeyConstraintName
+					AND i.TableSchemaName=o.TableSchemaName
+					AND i.ParentTableName=o.ParentTableName
+					AND i.ReferenceTableName=o.ReferenceTableName
+                FOR XML PATH('')), 1, 1, ''
+			) ParentColumnList
+                 ,
+		STUFF(
+				(
+                 SELECT ','+ReferencedColumnList
+                 FROM CTE_FK i
+                 WHERE i.ForeignKeyConstraintName=o.ForeignKeyConstraintName
+                 AND i.TableSchemaName=o.TableSchemaName
+                 AND i.ParentTableName=o.ParentTableName
+                 AND i.ReferenceTableName=o.ReferenceTableName
+                 FOR XML PATH('')), 1, 1, ''
+			) RefColumnList
+FROM CTE_FK o
+GROUP BY 
+	tableSchemaName,
+    ParentTableName,
+    ReferenceTableName,
+    ForeignKeyConstraintName
 
 
--- select tables with multiple columns in relationship
+
+-- isolates tables with multiple columns in relationships and displays
 
 ;With CTE_FK AS (
 SELECT 
@@ -181,7 +178,7 @@ from sys.foreign_keys fk
         on pk_col.column_id = fk_cols.referenced_column_id
         and pk_col.object_id = pk_tab.object_id
 
-
+-- Official Microsoft docs
 --  https://learn.microsoft.com/en-us/sql/relational-databases/system-catalog-views/sys-foreign-key-columns-transact-sql?view=sql-server-ver16
 
 SELECT fk.name AS ForeignKeyName
@@ -204,10 +201,6 @@ INNER JOIN sys.columns c_child
     AND fkc.referenced_column_id = c_child.column_id
 ORDER BY t_parent.name, c_parent.name;
 
--- time queries
-SET STATISTICS TIME ON;
-
-
 -- schemas being used 
 select distinct (schema_name(fk_tab.schema_id) ) [Active Schemas]
  
@@ -224,4 +217,3 @@ from sys.foreign_keys fk
     inner join sys.columns pk_col
         on pk_col.column_id = fk_cols.referenced_column_id
         and pk_col.object_id = pk_tab.object_id
-
