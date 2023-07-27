@@ -7,7 +7,7 @@ This repo is for Power BI Reports meant to be re-used.
   <dd>a. https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-ver16&tabs=ssms</dd>
 </dl>
 
-# NOTES: <br>
+# Notes: <br>
 All resource materials and links used in development are included in each report on a page: "References". <br>
 Additional resources are included in each report on a page: "Power BI Tutorials and Resources"<br>
 At the time of this writing, the development enviornment: <br>
