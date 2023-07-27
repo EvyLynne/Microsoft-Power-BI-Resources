@@ -1,9 +1,9 @@
 # Microsoft Power BI Resources
 This repo is for Power BI Reports meant to be re-used.
 <ol>
-  <li> DATABASE_SCHEMA_SSMS is a Microsoft Power BI report used to visualize database relationships schemas.</li>
+  <li>DATABASE_SCHEMA_SSMS is a Microsoft Power BI report used to visualize database relationships schemas.</li>
   <li>a. This report can be downloaded and pointed at other Relational Sources and reused. </li>
-  <li> I used the Microsoft Adventureworks databases as samples - I used both the Data Warehouse and the OLTP to demonstrate differnet schema visualizations.</li>
+  <li>I used the Microsoft Adventureworks databases as samples - I used both the Data Warehouse and the OLTP to demonstrate differnet schema visualizations.</li>
   <li>a. https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-ver16&tabs=ssms</li>
 </ol>
 
