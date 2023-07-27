@@ -1,7 +1,7 @@
 # Microsoft Power BI Resources
 This repo is for Power BI Reports meant to be re-used.
 1. DATABASE_SCHEMA_SSMS is a Microsoft Power BI report used to visualize database relationships schemas. <br>
-    This report can be downloaded and pointed at other Relational Sources and reused. 
+&nbsp;&nbsp;&nbsp;&nbsp;This report can be downloaded and pointed at other Relational Sources and reused. 
 The development enviornment is SQL Server version SQL2022	RTM	Developer Edition (64-bit)	16.0.1050.5<br>
 https://www.microsoft.com/en-us/sql-server/sql-server-downloads <br>
 Sql Server Management Studio <br>
