@@ -9,6 +9,7 @@ This repo is for Power BI Reports meant to be re-used.  This repo is for all ski
 </ol>
 
 # Notes: <br>
+Because Microsoft does not make the Power BI service available to individuals, I am not able to publish my reports, create online semantic models, expose semantic models for ingestion, configure regular data refreshes or perform other routine service activities. <br>
 All resource materials and links used in development are included in each report on a page: "References". <br>
 Additional resources are included in each report on a page: "Power BI Tutorials and Resources"<br>
 At the time of this writing, the development enviornment: <br>
