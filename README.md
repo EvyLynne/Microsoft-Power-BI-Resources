@@ -2,9 +2,11 @@
 This repo is for Power BI Reports meant to be re-used.  This repo is for all skill levels from beginner to advanced. The intention is for advanced developers to utilize the reports as tools and for beginning developers to learn from. 
 <ol>
   <li><b>DATABASE_SCHEMA_SSMS</b> contains all artifacts for a Microsoft Power BI report used to visualize database relationships schemas in SSMS.</li>
+  <ol>
   <li>This report can be downloaded and pointed at other Relational Sources and reused. I've included the SQL script used to get the data as well as some alternative scripts.</li>
   <li>I used the Microsoft Adventureworks databases as samples - I used both the Data Warehouse and the OLTP to demonstrate differnet schema visualizations.</li>
   <li>https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-ver16&tabs=ssms</li>
+  </ol>
   <li><b>Week Time Intelligence</b> contains all artifacts for a Microsoft Power BI report with logic added to handle week over week calculations continuously between years. </li>
 </ol>
 
