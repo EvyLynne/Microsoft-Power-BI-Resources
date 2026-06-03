@@ -7,9 +7,14 @@ This repo is for Power BI Reports meant to be re-used.  This repo is for all ski
   <li>I used the Microsoft Adventureworks databases as samples - I used both the Data Warehouse and the OLTP to demonstrate differnet schema visualizations.</li>
   <li>https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-ver16&tabs=ssms</li>
   </ol>
-  <li><b>Week Time Intelligence</b> contains all artifacts for a Microsoft Power BI report with logic added to handle week over week calculations continuously between years. </li>
+  <li><b>Week Time Intelligence</b>   </li>
+    <ul>
+      <li>Power BI Report with Week over Week logic continuously year over year</li>
+      <li>Power BI Template with Week over Week logic continuously year over year</li>
+    </ul>
+  </li> <!-- Parent item closes AFTER the sub-list ends -->
+  <li>Grains</li>
 </ol>
-
 # Notes: <br>
 Because Microsoft does not make the Power BI service available to individuals, I am not able to publish my reports, create online semantic models, expose semantic models for ingestion, configure regular data refreshes or perform other routine service activities. <br>
 All resource materials and links used in development are included in each report on a page: "References". <br>
