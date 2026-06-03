@@ -8,10 +8,10 @@ This repo is for Power BI Reports meant to be re-used.  This repo is for all ski
   <li>https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-ver16&tabs=ssms</li>
   </ol>
   <li><b>Week Time Intelligence</b>   </li>
-    <ul>
+    <ol>
       <li>Power BI Report with Week over Week logic continuously year over year</li>
       <li>Power BI Template with Week over Week logic continuously year over year</li>
-    </ul>
+    </ol>
   </li> <!-- Parent item closes AFTER the sub-list ends -->
 </ol>
 # Notes: <br>
