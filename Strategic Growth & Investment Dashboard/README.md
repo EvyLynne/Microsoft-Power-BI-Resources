@@ -7,10 +7,7 @@ Guide to contents of this repo
   <tr>
     <td>TGT_PowerQuery_Connection_Exceptions.xlsx</td>
     <td>Target_TGT_PowerBI_Complete_Guide.docx/td>    
-</td>
-    <td>Maria Anders</td>
-    <td>Germany</td>
-  </tr>
+   </tr>
   <tr>
     <td>Connections that require manual intervention</td>
     <td>Guide created and edited by Claude to create the report</td>
