@@ -1,5 +1,5 @@
 Guide to contents of this repo
-<table>
+<table> 
   <tr>
     <th>File</th>
     <th>Description</th>
