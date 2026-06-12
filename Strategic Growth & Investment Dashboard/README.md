@@ -6,7 +6,7 @@ Guide to contents of this repo
    </tr>
   <tr>
     <td>TGT_PowerQuery_Connection_Exceptions.xlsx</td>
-    <td>Target_TGT_PowerBI_Complete_Guide.docx/td>    
+    <td>Target_TGT_PowerBI_Complete_Guide.docx</td>    
    </tr>
   <tr>
     <td>Connections that require manual intervention</td>
